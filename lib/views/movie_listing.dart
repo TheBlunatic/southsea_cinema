@@ -2,8 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
-class MovieListing extends StatelessWidget {
+class MovieListing extends StatefulWidget {
   const MovieListing({super.key});
+
+  @override State<StatefulWidget> createState() {
+    return _MovieListingState();
+  }
+}
+
+class _MovieListingState extends State<MovieListing> {
+  int _ticketQuantity = 0;
+  int _selectedQuantity = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +92,12 @@ class MovieListing extends StatelessWidget {
               DropdownMenu<int> (
                 initialSelection: 10,
                 onSelected: (int? value) {
-                  
+                  if (value == null) {
+                    _selectedQuantity = 0;
+                  }
+                  else {
+                    _selectedQuantity = value;
+                  }
                 },
                 dropdownMenuEntries: [
                   DropdownMenuEntry(value: 1, label: '1'),
@@ -109,9 +123,20 @@ class MovieListing extends StatelessWidget {
                   backgroundColor: cinemaBrandDark,
                   foregroundColor: Colors.white,
                 ),
-                onPressed: () => (),
+                onPressed: () => {
+                  setState(() => _ticketQuantity += _selectedQuantity)
+                },
                 child: const Text('Add to order'),
               ),
+              const SizedBox(width: 16)
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(width: 16),
+              Text("$_ticketQuantity tickets in basket"),
               const SizedBox(width: 16)
             ],
           ),
