@@ -31,7 +31,7 @@ class MovieListing extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(width: 16),
-              Text("<location>"),
+              Text("Southsea Cinema Room"),
               const SizedBox(width: 16)
             ],
           ),
@@ -40,7 +40,7 @@ class MovieListing extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(width: 16),
-              Text("<time>"),
+              Text("Thursday 22 Oct 2026, 18:00 - ends at 20:07"),
               const SizedBox(width: 16)
             ],
           ),
@@ -49,7 +49,7 @@ class MovieListing extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(width: 16),
-              Text("<notes>"),
+              Text("Please note that Discounts / Membership Benefits will be \napplied once you have selected your tickets"),
               const SizedBox(width: 16)
             ],
           ),
@@ -58,7 +58,7 @@ class MovieListing extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(width: 16),
-              Text("<instructions>"),
+              Text("Select Quantities (Up to 5 in total)"),
               const SizedBox(width: 16)
             ],
           ),
@@ -67,7 +67,11 @@ class MovieListing extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(width: 16),
-              Text("<ticket header>"),
+              Text 
+              (
+                "Tickets",
+                textScaler: TextScaler.linear(1.67),
+              ),
               const SizedBox(width: 16)
             ],
           ),
