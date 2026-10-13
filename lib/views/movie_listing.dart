@@ -99,7 +99,15 @@ class MovieListing extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(width: 16),
-              Text("<add button>"),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(),
+                  backgroundColor: cinemaBrandDark,
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () => (),
+                child: const Text('Add to order'),
+              ),
               const SizedBox(width: 16)
             ],
           ),
