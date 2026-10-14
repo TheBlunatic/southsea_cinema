@@ -118,9 +118,7 @@ class _MovieListingState extends State<MovieListing> {
                   backgroundColor: cinemaBrandDark,
                   foregroundColor: Colors.white,
                 ),
-                onPressed: () => {
-                  setState(() => _ticketQuantity += _selectedQuantity)
-                },
+                onPressed: () => setState(() => _ticketQuantity += _selectedQuantity),
                 child: const Text('Add to order'),
               ),
               const SizedBox(width: 16)
