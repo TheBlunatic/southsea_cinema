@@ -92,12 +92,7 @@ class _MovieListingState extends State<MovieListing> {
               DropdownMenu<int> (
                 initialSelection: 10,
                 onSelected: (int? value) {
-                  if (value == null) {
-                    _selectedQuantity = 0;
-                  }
-                  else {
-                    _selectedQuantity = value;
-                  }
+                  _selectedQuantity = value ?? 0;
                 },
                 dropdownMenuEntries: [
                   DropdownMenuEntry(value: 1, label: '1'),
