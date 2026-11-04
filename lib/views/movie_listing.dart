@@ -4,9 +4,12 @@ import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
 class MovieListing extends StatefulWidget {
-  const MovieListing({super.key, required Movie movie});
+  final Movie movie;
 
-  @override State<StatefulWidget> createState() {
+  const MovieListing({super.key, required this.movie});
+
+  @override
+  State<StatefulWidget> createState() {
     return _MovieListingState();
   }
 }
@@ -32,10 +35,24 @@ class _MovieListingState extends State<MovieListing> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(width: 16),
-              Text("Jurassic Park (1993) (PG)", textScaler: TextScaler.linear(2),),
+              Text(
+                "${widget.movie.title} (${widget.movie.ageRating})",
+                textScaler: TextScaler.linear(2),
+              ),
               const SizedBox(width: 16)
             ],
           ),
+          const SizedBox(height: 16),
+          Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+            const SizedBox(width: 16),
+            Image.asset(
+              widget.movie.posterImagePath,
+              width: 80,
+              height: 140,
+              fit: BoxFit.cover,
+            ),
+            const SizedBox(width: 16),
+          ]),
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -50,7 +67,7 @@ class _MovieListingState extends State<MovieListing> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(width: 16),
-              Text("Thursday 22 Oct 2026, 18:00 - ends at 20:07"),
+              Text(widget.movie.screeningTime),
               const SizedBox(width: 16)
             ],
           ),
@@ -59,7 +76,8 @@ class _MovieListingState extends State<MovieListing> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(width: 16),
-              Text("Please note that Discounts / Membership Benefits will be \napplied once you have selected your tickets"),
+              Text(
+                  "Please note that Discounts / Membership Benefits will be \napplied once you have selected your tickets"),
               const SizedBox(width: 16)
             ],
           ),
@@ -77,8 +95,7 @@ class _MovieListingState extends State<MovieListing> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(width: 16),
-              Text 
-              (
+              Text(
                 "Tickets",
                 textScaler: TextScaler.linear(1.67),
               ),
@@ -90,7 +107,7 @@ class _MovieListingState extends State<MovieListing> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(width: 16),
-              DropdownMenu<int> (
+              DropdownMenu<int>(
                 initialSelection: 10,
                 onSelected: (int? value) {
                   _selectedQuantity = value ?? 0;
@@ -104,7 +121,10 @@ class _MovieListingState extends State<MovieListing> {
                 ],
               ),
               const SizedBox(width: 16),
-              Text("Adult (£7.50)", textScaler: TextScaler.linear(1.5),),
+              Text(
+                "Adult (£${widget.movie.ticketPrice.toStringAsFixed(2)})",
+                textScaler: TextScaler.linear(1.5),
+              ),
               const SizedBox(width: 16),
             ],
           ),
@@ -119,7 +139,8 @@ class _MovieListingState extends State<MovieListing> {
                   backgroundColor: cinemaBrandDark,
                   foregroundColor: Colors.white,
                 ),
-                onPressed: () => setState(() => _ticketQuantity += _selectedQuantity),
+                onPressed: () =>
+                    setState(() => _ticketQuantity += _selectedQuantity),
                 child: const Text('Add to order'),
               ),
               const SizedBox(width: 16)
