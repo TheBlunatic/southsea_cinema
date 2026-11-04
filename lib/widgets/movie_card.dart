@@ -18,6 +18,7 @@ class MovieCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
+          child: Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -88,6 +89,7 @@ class MovieCard extends StatelessWidget {
               ]),
             ],
           ),
+          )
         ));
   }
 }
