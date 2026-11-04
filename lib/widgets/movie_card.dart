@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/models/movie.dart';
 
 class MovieCard extends StatelessWidget {
@@ -9,6 +10,11 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+        color: Theme.of(context)
+            .copyWith(
+              cardColor: Colors.grey[900],
+            )
+            .cardColor,
         margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -17,16 +23,17 @@ class MovieCard extends StatelessWidget {
             children: [
               Row(children: [
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 16.0),
                   child: Text(
                     movie.title,
                     style: Theme.of(context).textTheme.headlineLarge,
                   ),
                 ),
-                const SizedBox(width: 16),
+                const SizedBox(width: 7),
                 Text(
                   movie.ageRating,
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: Theme.of(context).textTheme.labelLarge,
                 ),
               ]),
               const SizedBox(height: 16),
@@ -38,10 +45,17 @@ class MovieCard extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
                 const SizedBox(width: 16),
-                Text(
-                  movie.synopsis,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
+                Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.start,
+                  textDirection: TextDirection.ltr,
+                  direction: Axis.horizontal,
+                  children: [
+                    Text(
+                      movie.synopsis,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ],
+                    ),
               ]),
               const SizedBox(height: 16),
               Row(children: [
@@ -53,9 +67,7 @@ class MovieCard extends StatelessWidget {
                   ),
                 ),
               ]),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
@@ -64,8 +76,14 @@ class MovieCard extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(),
+                    backgroundColor: cinemaBrandDark,
+                    foregroundColor: Colors.white,
+                  ),
                   onPressed: () => print("listing pressed"),
-                  child: Text('BOOK NOW', style: Theme.of(context).textTheme.bodyLarge),
+                  child: Text('BOOK NOW',
+                      style: Theme.of(context).textTheme.bodyLarge),
                 ),
               ]),
             ],
