@@ -19,7 +19,7 @@ class MovieRepository {
         ageRating: 'PG',
         screeningTime: '9:00 PM',
         ticketPrice: 7.50,
-        posterImagePath: 'assets/images/jurassicpark1993poster.jpg',
+        posterImagePath: 'assets/images/jurassicparkposter1993.jpg',
       ),
     ];
   }
