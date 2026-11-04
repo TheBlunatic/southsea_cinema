@@ -1,6 +1,16 @@
 import 'package:southsea_cinema/models/movie.dart';
 
 class MovieRepository {
+  
+  Movie? getMovieById(String id) {
+    for (final movie in getMovies()) {
+      if (movie.id == id) {
+        return movie;
+      }
+    }
+    return null;
+  }
+
   List<Movie> getMovies() {
     return [
       Movie(
