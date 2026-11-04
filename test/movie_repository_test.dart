@@ -3,7 +3,8 @@ import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/repositories/movie_repository.dart';
 
 void main() {
-  testWidgets('Ensure movie repository works as intended', (WidgetTester tester) async {
+  testWidgets('Ensure movie repository works as intended',
+      (WidgetTester tester) async {
     MovieRepository movieRepository = MovieRepository();
     List<Movie> movies = movieRepository.getMovies();
 
@@ -15,6 +16,5 @@ void main() {
     Movie? movie1 = movieRepository.getMovieById("1");
     expect(movie1, isNotNull);
     expect(movie1!.id, "1");
-
   });
 }

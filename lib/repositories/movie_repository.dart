@@ -1,7 +1,6 @@
 import 'package:southsea_cinema/models/movie.dart';
 
 class MovieRepository {
-  
   Movie? getMovieById(String id) {
     for (final movie in getMovies()) {
       if (movie.id == id) {
@@ -16,7 +15,8 @@ class MovieRepository {
       Movie(
         id: "0",
         title: 'Dune: Part One',
-        synopsis: "Paul Atreides arrives on Arrakis\nafter his father accepts the\nstewardship of the dangerous\nplanet. However, chaos ensues after\na betrayal as forces clash to\ncontrol melange, a precious \nresource.",
+        synopsis:
+            "Paul Atreides arrives on Arrakis\nafter his father accepts the\nstewardship of the dangerous\nplanet. However, chaos ensues after\na betrayal as forces clash to\ncontrol melange, a precious \nresource.",
         ageRating: '12A',
         screeningTime: '7:00 PM',
         ticketPrice: 12.50,
@@ -25,7 +25,8 @@ class MovieRepository {
       Movie(
         id: "1",
         title: 'Jurassic Park (1993)',
-        synopsis: "An industrialist invites some \nexperts to visit his theme park of \ncloned dinosaurs. After a power \nfailure, the creatures run loose, \nputting everyone's lives, including \nhis grandchildren's, in danger.",
+        synopsis:
+            "An industrialist invites some \nexperts to visit his theme park of \ncloned dinosaurs. After a power \nfailure, the creatures run loose, \nputting everyone's lives, including \nhis grandchildren's, in danger.",
         ageRating: 'PG',
         screeningTime: '9:00 PM',
         ticketPrice: 7.50,
