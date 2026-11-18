@@ -107,7 +107,7 @@ class _SettingsViewState extends State<SettingsView> {
                 controller: _patronNumberController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Patron Number',
+                  labelText: 'Patron number',
                   hintText: 'Enter your patron number',
                 ),
               ),
