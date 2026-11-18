@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/models/user_settings.dart';
 import 'package:southsea_cinema/widgets/primary_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+const String prefPatronNumber = 'patron_number';
+const String prefAddress = 'address';
+const String prefEmail = 'email_address';
+const String prefEmailUpdates = 'email_updates';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({super.key});
@@ -20,10 +26,40 @@ class _SettingsViewState extends State<SettingsView> {
   bool _receiveNewsByEmail = true;
   String _confirmationMessage = '';
 
-  void _saveSettings() {
+  Future<void> _loadSettings() async {
+    final SharedPreferencesAsync prefs = SharedPreferencesAsync();
+
+    final String? savedPatronNumber = await prefs.getString(prefPatronNumber);
+    final String? savedAddress = await prefs.getString(prefAddress);
+    final String? savedEmail = await prefs.getString(prefEmail);
+    final bool? savedEmailUpdates = await prefs.getBool(prefEmailUpdates);
+
+    String patronNumber = savedPatronNumber ?? '';
+    String address = savedAddress ?? '';
+    String email = savedEmail ?? '';
+    bool receiveNewsByEmail = savedEmailUpdates ?? true;
+
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _patronNumberController.text = patronNumber;
+      _addressController.text = address;
+      _emailController.text = email;
+      _receiveNewsByEmail = receiveNewsByEmail;
+    });
+  }
+
+  Future<void> _saveSettings() async {
     final String patronNumber = _patronNumberController.text.trim();
     final String address = _addressController.text.trim();
     final String email = _emailController.text.trim();
+
+    final SharedPreferencesAsync prefs = SharedPreferencesAsync();
+    await prefs.setString(prefPatronNumber, patronNumber);
+    await prefs.setString(prefAddress, address);
+    await prefs.setString(prefEmail, email);
+    await prefs.setBool(prefEmailUpdates, _receiveNewsByEmail);
 
     final UserSettings settings = UserSettings(
       patronNumber: patronNumber,
@@ -33,6 +69,9 @@ class _SettingsViewState extends State<SettingsView> {
     );
 
     setState(() {
+      if (!mounted) {
+        return;
+      }
       _confirmationMessage = 'Settings saved for ${settings.email}';
     });
   }
@@ -43,6 +82,7 @@ class _SettingsViewState extends State<SettingsView> {
     _patronNumberController = TextEditingController();
     _addressController = TextEditingController();
     _emailController = TextEditingController();
+    _loadSettings();
   }
 
   @override
@@ -70,7 +110,10 @@ class _SettingsViewState extends State<SettingsView> {
               const SizedBox(height: 16),
               const Text(
                 'Address',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: cinemaFontMuted),
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: cinemaFontMuted),
               ),
               const SizedBox(height: 8),
               TextField(
@@ -85,7 +128,10 @@ class _SettingsViewState extends State<SettingsView> {
               const SizedBox(height: 16),
               const Text(
                 'Email Address',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: cinemaFontMuted),
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: cinemaFontMuted),
               ),
               const SizedBox(height: 8),
               TextField(
@@ -100,7 +146,10 @@ class _SettingsViewState extends State<SettingsView> {
               const SizedBox(height: 16),
               const Text(
                 'Patron Number',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: cinemaFontMuted),
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: cinemaFontMuted),
               ),
               const SizedBox(height: 8),
               TextField(
@@ -114,7 +163,10 @@ class _SettingsViewState extends State<SettingsView> {
               const SizedBox(height: 16),
               const Text(
                 'Preferences',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: cinemaFontMuted),
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: cinemaFontMuted),
               ),
               const SizedBox(height: 8),
               Row(
@@ -134,19 +186,19 @@ class _SettingsViewState extends State<SettingsView> {
               ),
               const SizedBox(height: 20),
               SizedBox(
-              width: double.infinity,
-              child: PrimaryButton(
-                label: 'SAVE SETTINGS',
-                onPressed: _saveSettings,
+                width: double.infinity,
+                child: PrimaryButton(
+                  label: 'SAVE SETTINGS',
+                  onPressed: _saveSettings,
+                ),
               ),
-            ),
-            if (_confirmationMessage.isNotEmpty) ...[
-              const SizedBox(height: 12),
-              Text(
-                _confirmationMessage,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ],
+              if (_confirmationMessage.isNotEmpty) ...[
+                const SizedBox(height: 12),
+                Text(
+                  _confirmationMessage,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
             ])));
   }
 }
