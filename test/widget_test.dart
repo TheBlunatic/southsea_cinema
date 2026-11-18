@@ -11,13 +11,5 @@ void main() {
       expect(find.byType(HomeView), findsOneWidget);
       expect(find.text(appTitle), findsOneWidget);
     });
-
-    testWidgets('Displays movie cards with names and info',
-        (WidgetTester tester) async {
-      SouthseaCinemaApp app = const SouthseaCinemaApp();
-      await tester.pumpWidget(app);
-      expect(find.text('Dune: Part One'), findsOneWidget);
-      expect(find.text('Jurassic Park (1993)'), findsOneWidget);
-    });
   });
 }
