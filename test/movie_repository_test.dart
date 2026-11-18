@@ -17,4 +17,15 @@ void main() {
     expect(movie1, isNotNull);
     expect(movie1!.id, "1");
   });
+
+  test('loadMoviesFromAsset reads the bundled JSON menu', () async {
+      final MovieRepository repository = MovieRepository();
+      final List<Movie> movies =
+          await repository.loadMoviesFromAsset();
+
+      expect(movies.length, 2);
+      expect(movies[0].id, '3');
+      expect(movies[1].id, '4');
+      expect(repository.getMovies(), movies);
+    });
 }
