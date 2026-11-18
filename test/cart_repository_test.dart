@@ -32,7 +32,7 @@ void main() {
     test('starts with empty basket and zero totals', () {
       final CartRepository cart = CartRepository.instance;
       expect(cart.getItems().length, 0);
-      expect(cart.getTotal(), 0);
+      expect(cart.getTotalPrice(), 0);
     });
 
     test('adds items and calculates total correctly', () {
@@ -50,7 +50,7 @@ void main() {
       cart.addItem(item2);
 
       expect(cart.getItems().length, 2);
-      expect(cart.getTotal(), 26.0);
+      expect(cart.getTotalPrice(), 26.0);
     });
 
     test('removes items correctly', () {
@@ -64,7 +64,7 @@ void main() {
 
       cart.removeItem(0);
       expect(cart.getItems().length, 0);
-      expect(cart.getTotal(), 0.0);
+      expect(cart.getTotalPrice(), 0.0);
     });
   });
 }

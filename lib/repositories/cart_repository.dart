@@ -25,10 +25,18 @@ class CartRepository {
     _items.clear();
   }
 
-  double getTotal() {
+  double getTotalPrice() {
     double sum = 0.0;
     for (final CartItem item in _items) {
       sum += item.lineTotal;
+    }
+    return sum;
+  }
+
+  double getTotalQuantity() {
+    double sum = 0.0;
+    for (final CartItem item in _items) {
+      sum += item.quantity;
     }
     return sum;
   }

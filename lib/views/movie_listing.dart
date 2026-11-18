@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
+import 'package:southsea_cinema/models/cart_item.dart';
 import 'package:southsea_cinema/models/movie.dart';
+import 'package:southsea_cinema/repositories/cart_repository.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/widgets/primary_button.dart';
 
@@ -16,7 +18,6 @@ class MovieListing extends StatefulWidget {
 }
 
 class _MovieListingState extends State<MovieListing> {
-  int _ticketQuantity = 0;
   int _selectedQuantity = 0;
 
   @override
@@ -133,8 +134,12 @@ class _MovieListingState extends State<MovieListing> {
               const SizedBox(width: 16),
               PrimaryButton(
                 label: 'Add to order',
-                onPressed: () =>
-                    setState(() => _ticketQuantity += _selectedQuantity),
+                onPressed: () => setState(() => CartRepository.instance.addItem(
+                      CartItem(
+                        movie: widget.movie,
+                        quantity: _selectedQuantity,
+                      ),
+                    )),
               ),
               const SizedBox(width: 16)
             ],
@@ -144,7 +149,8 @@ class _MovieListingState extends State<MovieListing> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(width: 16),
-              Text("$_ticketQuantity tickets in basket"),
+              Text(
+                  "${CartRepository.instance.getTotalQuantity()} tickets in basket"),
               const SizedBox(width: 16)
             ],
           ),
