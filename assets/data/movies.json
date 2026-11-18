@@ -1,0 +1,20 @@
+[
+    {
+        "id": "0",
+        "title": "Dune: Part One",
+        "synopsis": "Paul Atreides arrives on Arrakis\nafter his father accepts the\nstewardship of the dangerous\nplanet. However, chaos ensues after\na betrayal as forces clash to\ncontrol melange, a precious \nresource.",
+        "ageRating": "12A",
+        "screeningTime": "7:00 PM",
+        "ticketPrice": 12.50,
+        "posterImagePath": "assets/images/dunepart1poster2021.jpg"
+    },
+    {
+        "id": "1",
+        "title": "Jurassic Park (1993)",
+        "synopsis": "An industrialist invites some \nexperts to visit his theme park of \ncloned dinosaurs. After a power \nfailure, the creatures run loose, \nputting everyone's lives, including \nhis grandchildren's, in danger.",
+        "ageRating": "PG",
+        "screeningTime": "9:00 PM",
+        "ticketPrice": 7.50,
+        "posterImagePath": "assets/images/jurassicparkposter1993.jpg"
+    }
+]
